@@ -3,9 +3,10 @@ import collections
 通过下标访问数组中的元素
 当需要判断这个元素是否出现过，我们就使用哈希表
 hashcode
+哈希法比较难去重
 hashfunction = hashcode(name)%tablesize
 common hash structures: 
-    1. 数组：范围小  如果哈希值比较少、特别分散、跨度非常大，使用数组就造成空间的极大浪费
+    1. 数组[]：范围小  如果哈希值比较少、特别分散、跨度非常大，使用数组就造成空间的极大浪费  []
     2. set 集合：范围大, 空间，速度比数组大（单个）
     3. map 映射：有y值 dict？（有对应的数值）
 '''
