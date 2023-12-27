@@ -73,6 +73,25 @@ class Solution(object):
         right = self.preorderTraversal(root.right)
         return [root.val]+left+right
 
+# 迭代遍历 前序 （原理和后序相同）
+class Solution(object):
+    def preorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        if not root:
+            return []
+        result = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            result.append(node.val)
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+        return result
 '''145
 
 '''
@@ -88,6 +107,30 @@ class Solution(object): # my solution
         right = self.postorderTraversal(root.right)
         return left + right +[root.val]
 
+# 迭代遍历 后序
+class Solution(object):
+    def postorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        # if not root:
+        #     return []
+        # left = self.postorderTraversal(root.left)
+        # right = self.postorderTraversal(root.right)
+        # return left + right +[root.val]
+        if not root:
+            return []
+        stack = [root]
+        result = []
+        while stack:
+            node = stack.pop()
+            result.append(node.val)
+            if node.left:
+                stack.append(node.left)
+            if node.right:
+                stack.append(node.right)
+        return result[::-1]
 
 '''94
 
@@ -105,3 +148,27 @@ class Solution(object): #my solution
         right = self.inorderTraversal(root.right)
         return left+[root.val]+right
 
+# 迭代遍历
+class Solution(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        if not root:
+            return []
+        # left = self.inorderTraversal(root.left)
+        # right = self.inorderTraversal(root.right)
+        # return left+[root.val]+right
+        result = []
+        stack = []
+        cur = root
+        while cur or stack:
+            if cur:
+                stack.append(cur)
+                cur = cur.left
+            else:
+                cur = stack.pop()
+                result.append(cur.val)
+                cur = cur.right
+        return result
