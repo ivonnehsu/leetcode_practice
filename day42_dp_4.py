@@ -70,7 +70,7 @@ class Solution(object): #my sol
         if remaining!=0: return False
         dp=[0]*(total+1) #初始成非负正数的最小值 （因为压缩 要用上一层的）
         for i in range(len(nums)):
-            for j in range(total,nums[i]-1,-1):
+            for j in range(total,nums[i]-1,-1): #j要大于nums[i]-1  要不然是放不进去的
                 dp[j]=max(dp[j],dp[j-nums[i]]+nums[i])
                 # print(dp[j])
         return dp[-1]==total
