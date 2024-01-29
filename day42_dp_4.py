@@ -56,4 +56,21 @@ if __name__ == "__main__":
 
 '''416. 分割等和子集
 
+01背包 （只能使用一次）
+相当于背包问题 是否能装满1/2
 '''
+class Solution(object): #my sol
+    def canPartition(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        total,remaining = sum(nums)/2,sum(nums)%2
+        # print(total,remaining)
+        if remaining!=0: return False
+        dp=[0]*(total+1) #初始成非负正数的最小值 （因为压缩 要用上一层的）
+        for i in range(len(nums)):
+            for j in range(total,nums[i]-1,-1):
+                dp[j]=max(dp[j],dp[j-nums[i]]+nums[i])
+                # print(dp[j])
+        return dp[-1]==total
