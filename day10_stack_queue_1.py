@@ -209,3 +209,50 @@ class MyStack:
         因为只有in存了数据，只要判断in是不是有数即可
         """
         return len(self.queue_in) == 0
+
+
+
+'''317 
+
+'''
+class Solution(object):
+    def shortestDistance(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+        """
+        directions = [(1,0),(-1,0),(0,1),(0,-1)]
+        m, n = len(grid), len(grid[0])
+
+        def bfs(candidates,building):
+            visited = set()
+            distance = 0
+            cur = [building]
+            while cur:
+                distance+=1
+                next_level = []
+                for position in cur:
+                    for direction in directions:
+                        next_position = (position[0]+direction[0],position[1]+direction[1])
+                        if next_position in candidates and next_position not in visited:
+                             candidates[next_position]+=distance
+                             visited.add(next_position)
+                             next_level.append(next_position)
+                cur = next_level
+            if len(visited) != len(candidates):
+                for position in set(candidates.keys()).difference(visited):
+                    candidates.pop(position)
+
+
+
+        buildings = []
+        candidates = dict()
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j]==1:
+                    buildings.append((i,j))
+                if grid[i][j]==0:
+                    candidates[(i,j)]=0
+        for building in buildings:
+            bfs(candidates,building)
+        return min(candidates.values()) if buildings and candidates else -1
