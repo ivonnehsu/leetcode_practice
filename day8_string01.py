@@ -10,7 +10,7 @@ class Solution: #kinda my solution
         """
         s[:] = reversed(s)
 
-#双指针
+#双指针,两个指针都变动的
 class Solution:
     def reverseString(self, s: List[str]) -> None:
         """
